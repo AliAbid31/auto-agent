@@ -31,7 +31,8 @@ export default function AutoChatPage() {
     setLoading(true);
 
     try {
-      const backUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+      const rawUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+      const backUrl = rawUrl.replace(/\/+$/, "");
       const response = await fetch(`${backUrl}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
