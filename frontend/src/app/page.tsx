@@ -63,7 +63,7 @@ export default function AutoChatPage() {
           </div>
           <div>
             <h1 className="font-semibold text-base tracking-wide">AutoExpert RAG</h1>
-            <p className="text-xs text-neutral-400">Histoire Automobile & Veille Web Tavily</p>
+            <p className="text-xs text-neutral-400">Histoire Automobile Et Actualités</p>
           </div>
         </div>
         <button
