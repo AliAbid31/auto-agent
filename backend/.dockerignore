@@ -1,0 +1,16 @@
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Fichiers de cache Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Fichiers secrets locaux (ne JAMAIS inclure les clés dans l'image Docker)
+.env
+
+# Git
+.git/
+.gitignore

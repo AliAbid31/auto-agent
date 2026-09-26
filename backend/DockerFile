@@ -1,0 +1,31 @@
+# 1. Image de base officielle Python légère
+FROM python:3.10-slim
+
+# 2. Variables d'environnement pour optimiser l'exécution de Python
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# 3. Définir le dossier de travail à l'intérieur du conteneur
+WORKDIR /app
+
+# 4. Installation des dépendances système nécessaires pour FAISS et C++
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libgomp1 \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# 5. Optimisation du cache Docker : copier et installer requirements d'abord
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# 6. Copier le reste du code de l'application (app/, data/, etc.)
+COPY . .
+
+# 7. Documenter le port utilisé
+EXPOSE 8000
+
+# 8. Commande de démarrage du serveur FastAPI
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
